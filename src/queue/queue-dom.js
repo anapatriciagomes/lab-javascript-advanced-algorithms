@@ -17,7 +17,7 @@ const generateListQueue = () => {
   warningTopQueue.style.display = 'none';
   warningBottomQueue.style.display = 'none';
   queueUL.innerHTML = '';
-  let length = queueUL.display().length;
+  let length = queue.display().length;
   let size = queue.MAX_SIZE - length;
   queue.display().forEach(item => {
     let li = document.createElement('li');
@@ -47,20 +47,21 @@ const generateWarningQueue = type => {
 const addToQueue = () => {
   try {
     if (queue.enqueue(queueInput.value) === 'QUEUE_OVERFLOW') {
-      generateWarningQueue('overflow');
+      clearQueueInput();
+      generateListQueue();
     }
   } catch (error) {
-    clearQueueInput();
-    generateListQueue();
+    generateWarningQueue('overflow');
   }
 };
 
 const removeFromQueue = () => {
   try {
-    if (queue.dequeue() === 'QUEUE_UNDERFLOW');
-    generateWarningQueue('underflow');
+    if (queue.dequeue() === 'QUEUE_UNDERFLOW') {
+      generateListQueue();
+    }
   } catch (error) {
-    generateListQueue();
+    generateWarningQueue('underflow');
   }
 };
 
