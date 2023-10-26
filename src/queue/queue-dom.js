@@ -48,6 +48,7 @@ const addToQueue = () => {
   if (queue.canEnqueue() === false) {
     generateWarningQueue('overflow');
   } else {
+    queue.enqueue(queueInput.value);
     clearQueueInput();
     generateListQueue();
   }
@@ -57,6 +58,7 @@ const removeFromQueue = () => {
   if (queue.isEmpty() === true) {
     generateWarningQueue('underflow');
   } else {
+    queue.dequeue();
     generateListQueue();
   }
 };

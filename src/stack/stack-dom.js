@@ -46,18 +46,20 @@ const generateWarningStack = type => {
 };
 
 const addToStack = () => {
-  if (newStack.push(stackInput.value) === 'STACK_OVERFLOW') {
+  if (newStack.canPush() === false) {
     generateWarningStack('overflow');
   } else {
+    newStack.push(stackInput.value);
     clearStackInput();
     renderListStack();
   }
 };
 
 const removeFromStack = () => {
-  if (newStack.pop() === 'STACK_UNDERFLOW') {
+  if (newStack.isEmpty() === true) {
     generateWarningStack('underflow');
   } else {
+    newStack.pop();
     renderListStack();
   }
 };
