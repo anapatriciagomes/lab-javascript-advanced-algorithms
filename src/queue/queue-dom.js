@@ -45,24 +45,20 @@ const generateWarningQueue = type => {
 };
 
 const addToQueue = () => {
-  try {
-    if (queue.enqueue(queueInput.value) === 'QUEUE_OVERFLOW') {
-      generateWarningQueue('overflow');
-    } else {
-      clearQueueInput();
-      generateListQueue();
-    }
-  } 
+  if (queue.canEnqueue() === false) {
+    generateWarningQueue('overflow');
+  } else {
+    clearQueueInput();
+    generateListQueue();
+  }
 };
 
 const removeFromQueue = () => {
-  try {
-    if (queue.dequeue() === 'QUEUE_UNDERFLOW') {
-      generateWarningQueue('underflow');
-    } else {
-      generateListQueue();
-    }
-  } 
+  if (queue.isEmpty() === true) {
+    generateWarningQueue('underflow');
+  } else {
+    generateListQueue();
+  }
 };
 
 addQueue.addEventListener('click', addToQueue);
