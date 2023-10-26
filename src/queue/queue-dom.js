@@ -47,22 +47,22 @@ const generateWarningQueue = type => {
 const addToQueue = () => {
   try {
     if (queue.enqueue(queueInput.value) === 'QUEUE_OVERFLOW') {
+      generateWarningQueue('overflow');
+    } else {
       clearQueueInput();
       generateListQueue();
     }
-  } catch (error) {
-    generateWarningQueue('overflow');
-  }
+  } 
 };
 
 const removeFromQueue = () => {
   try {
     if (queue.dequeue() === 'QUEUE_UNDERFLOW') {
+      generateWarningQueue('underflow');
+    } else {
       generateListQueue();
     }
-  } catch (error) {
-    generateWarningQueue('underflow');
-  }
+  } 
 };
 
 addQueue.addEventListener('click', addToQueue);
